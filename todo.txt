@@ -1,0 +1,3 @@
+5. wezterm key bindings
+6. shell
+7. vs code setting
