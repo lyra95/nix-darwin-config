@@ -7,12 +7,13 @@ inputs @ {
   profile = {
     userName = "95hyouka";
     hostName = "95hyoukas-MacBook-Air";
+    arch = "aarch64-darwin";
   };
-  pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+  pkgs = nixpkgs.legacyPackages."${profile.arch}";
 in {
   darwinConfigurations."${profile.hostName}" = nix-darwin.lib.darwinSystem {
     modules = [
-      (import ./modules/dunno.nix inputs)
+      (import ./modules/dunno.nix profile inputs)
       (import ./modules/homebrew profile inputs)
       {
         fonts.packages = [pkgs.d2coding];

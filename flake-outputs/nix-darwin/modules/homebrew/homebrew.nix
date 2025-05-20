@@ -3,9 +3,11 @@ profile @ {userName, ...}: inputs @ {
   homebrew-core,
   homebrew-cask,
   ...
-}:
-nix-homebrew.darwinModules.nix-homebrew
-{
+}: {
+  imports = [
+    nix-homebrew.darwinModules.nix-homebrew
+  ];
+
   nix-homebrew = {
     enable = true;
     user = userName;
