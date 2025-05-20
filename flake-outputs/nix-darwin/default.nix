@@ -22,7 +22,15 @@ in {
           pkgs.vim
           pkgs.git
           pkgs.direnv
+          pkgs.home-manager
         ];
+
+        users.users."95hyouka" = {
+          home = "/Users/95hyouka";
+          shell = pkgs.bash;
+        };
+
+        environment.shells = [pkgs.bash];
 
         nix.settings.experimental-features = "nix-command flakes";
 

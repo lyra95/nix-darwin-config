@@ -12,6 +12,7 @@ inputs @ {
     home = {
       home.username = name;
       home.homeDirectory = "/Users/${name}";
+      home.stateVersion = "25.05";
     };
   };
   commonModules = {
