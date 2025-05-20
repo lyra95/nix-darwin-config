@@ -18,6 +18,9 @@
         "podman-desktop"
         "steam"
         "parsec"
+        "fork"
+        "obsidian"
+        "cloudflare-warp"
       ]
       ++ work;
 

@@ -28,6 +28,18 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+      inputs.darwin.follows = "nix-darwin";
+    };
   };
 
   outputs = inputs @ {nixpkgs, ...}: let
@@ -36,5 +48,6 @@
     lib.attrsets.mergeAttrsList [
       (import ./flake-outputs/nix-darwin inputs)
       (import ./flake-outputs/devShell inputs)
+      (import ./flake-outputs/home-manager inputs)
     ];
 }
