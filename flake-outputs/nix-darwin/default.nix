@@ -25,6 +25,8 @@ in {
           pkgs.home-manager
         ];
 
+        system.primaryUser = profile.userName;
+
         system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;
         system.defaults.NSGlobalDomain.AppleShowAllFiles = true;
 
