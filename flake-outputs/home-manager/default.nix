@@ -111,7 +111,14 @@ in {
   homeConfigurations."95hyouka" = home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
     modules =
-      []
+      [
+        {
+          imports = [
+            ./modules/git
+          ];
+          git.enable = true;
+        }
+      ]
       ++ (builtins.attrValues commonModules)
       ++ (builtins.attrValues coreModules);
   };
