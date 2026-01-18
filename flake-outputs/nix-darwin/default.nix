@@ -22,6 +22,7 @@ in {
           pkgs.vim
           pkgs.git
           pkgs.direnv
+          pkgs.home-manager
         ];
 
         nix.settings.experimental-features = "nix-command flakes";

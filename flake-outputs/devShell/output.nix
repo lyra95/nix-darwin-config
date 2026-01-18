@@ -33,9 +33,14 @@ in {
         '';
       }
       {
-        help = "switch setup";
-        name = "sw";
-        command = "darwin-rebuild build --flake $PRJ_ROOT#95hyoukas-MacBook-Air";
+        help = "darwin switch";
+        name = "ds";
+        command = "darwin-rebuild switch --flake $PRJ_ROOT#95hyoukas-MacBook-Air";
+      }
+      {
+        help = "home-manager switch";
+        name = "hs";
+        command = "home-manager switch --flake $PRJ_ROOT#95hyouka";
       }
     ];
   };
