@@ -25,6 +25,11 @@ in {
           pkgs.home-manager
         ];
 
+        system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;
+        system.defaults.NSGlobalDomain.AppleShowAllFiles = true;
+
+        system.defaults.screencapture.target = "clipboard";
+
         nix.settings.experimental-features = "nix-command flakes";
 
         system.defaults.finder = {
