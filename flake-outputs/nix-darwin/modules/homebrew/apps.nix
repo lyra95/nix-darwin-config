@@ -13,7 +13,7 @@
         "visual-studio-code"
         "firefox"
         "1password"
-        "tailscale"
+        "tailscale-app"
         "jetbrains-toolbox"
         "podman-desktop"
         "steam"
