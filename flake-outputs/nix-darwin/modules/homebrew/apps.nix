@@ -26,6 +26,10 @@
       ]
       ++ work;
 
+    brews = [
+      "podman"
+    ];
+
     masApps = {
       "KakaoTalk" = 869223134;
     };
