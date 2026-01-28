@@ -23,6 +23,7 @@
         "cloudflare-warp"
         "spotify"
         "libreoffice"
+        "stirling-pdf"
       ]
       ++ work;
 
