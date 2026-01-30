@@ -35,12 +35,17 @@ in {
       {
         help = "darwin switch";
         name = "ds";
-        command = "darwin-rebuild switch --flake $PRJ_ROOT#95hyoukas-MacBook-Air";
+        command = "sudo darwin-rebuild switch --flake $PRJ_ROOT#95hyoukas-MacBook-Air";
       }
       {
         help = "home-manager switch";
         name = "hs";
         command = "home-manager switch --flake $PRJ_ROOT#95hyouka";
+      }
+      {
+        help = "update flake inputs";
+        name = "update";
+        command = "nix flake update --commit-lock-file";
       }
     ];
   };
