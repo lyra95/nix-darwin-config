@@ -34,6 +34,8 @@ in {
 
         nix.settings.experimental-features = "nix-command flakes";
 
+        security.pam.services.sudo_local.touchIdAuth = true;
+
         system.defaults.finder = {
           AppleShowAllExtensions = true;
           AppleShowAllFiles = true;
