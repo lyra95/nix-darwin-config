@@ -31,8 +31,10 @@
       "podman"
     ];
 
+    # how to get id: mas search "KakaoTalk"
     masApps = {
       "KakaoTalk" = 869223134;
+      "Line" = 539883307;
     };
   };
 }
