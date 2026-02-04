@@ -24,6 +24,7 @@
         "spotify"
         "libreoffice"
         "stirling-pdf"
+        "anki"
       ]
       ++ work;
 
