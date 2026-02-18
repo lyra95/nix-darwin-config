@@ -24,7 +24,7 @@
         merge.conflictstyle = "diff3";
         user.name = "jo";
         user.email = "lyra95@shiftup.co.kr";
-        aliases = {
+        alias = {
           # Prettier `git log`
           lg = "log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
           rb = "rebase --interactive";
