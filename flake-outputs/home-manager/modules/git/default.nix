@@ -69,13 +69,12 @@
         controlPath = "~/.ssh/master-%r@%n:%p";
         controlPersist = "no";
       };
-      extraConfig = ''
-        Host github.com
-            User jo
-            HostName github.com
-            PreferredAuthentications publickey
-            IdentityFile ${config.age.secrets.github_ed25519.path}
-      '';
+      matchBlocks."github.com" = {
+        user = "jo";
+        hostname = "github.com";
+        identityFile = "${config.age.secrets.github_ed25519.path}";
+        extraOptions."PreferredAuthentications" = "publickey";
+      };
     };
   };
 }

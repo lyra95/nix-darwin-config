@@ -7,7 +7,11 @@ inputs @ {
   pkgs = nixpkgs.legacyPackages."aarch64-darwin";
   name = "95hyouka";
   coreModules = {
-    age = agenix.homeManagerModules.default;
+    age = {config, ...}: {
+      imports = [agenix.homeManagerModules.default];
+      xdg.enable = true;
+      age.secretsDir = "${config.xdg.cacheHome}/agenix";
+    };
 
     home = {
       home.username = name;
