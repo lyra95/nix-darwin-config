@@ -25,6 +25,7 @@
         "libreoffice"
         "stirling-pdf"
         "anki"
+        "discord"
       ]
       ++ work;
 
