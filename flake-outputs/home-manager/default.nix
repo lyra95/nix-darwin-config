@@ -46,6 +46,7 @@ inputs @ {
         historyIgnore = ["ls" "cd" "exit"];
         shellAliases = {
           ns = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
+          bs = "brew search --eval-all '' | fzf --preview 'brew info {}'";
         };
       };
 
