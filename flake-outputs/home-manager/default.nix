@@ -52,6 +52,7 @@ inputs @ {
       programs.yazi = {
         enable = true;
         enableBashIntegration = true;
+        shellWrapperName = "yy";
       };
 
       # tmux alternative
