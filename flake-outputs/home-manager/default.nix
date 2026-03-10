@@ -25,13 +25,28 @@ inputs @ {
         jq
         yq-go
         hex
-        nix-search-cli
       ];
+
+      programs.nix-search-tv = {
+        enable = true;
+        settings = {
+          indexes = ["nixpkgs" "home-manager" "nixos"];
+
+          experimental = {
+            render_docs_indexes = {
+              nvf = "https://notashelf.github.io/nvf/options.html";
+            };
+          };
+        };
+      };
 
       programs.bash = {
         enable = true;
         historyControl = ["erasedups" "ignoredups" "ignorespace"];
         historyIgnore = ["ls" "cd" "exit"];
+        shellAliases = {
+          ns = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
+        };
       };
 
       programs.starship = {
