@@ -29,9 +29,7 @@
       ]
       ++ work;
 
-    brews = [
-      "podman"
-    ];
+    brews = [];
 
     # how to get id: mas search "KakaoTalk"
     masApps = {
