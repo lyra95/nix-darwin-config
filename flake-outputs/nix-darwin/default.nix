@@ -10,6 +10,20 @@ inputs @ {
     arch = "aarch64-darwin";
   };
   pkgs = nixpkgs.legacyPackages."${profile.arch}";
+
+  # nixpkgs installs sioyek's shaders and default configs into the app bundle's
+  # Contents/MacOS, but sioyek looks them up under Contents/Resources, so every
+  # page renders blank without this.
+  sioyek = pkgs.sioyek.overrideAttrs (old: {
+    postInstall =
+      old.postInstall
+      + ''
+        resources=$out/Applications/sioyek.app/Contents/Resources
+        mkdir -p $resources
+        cp -r pdf_viewer/shaders $resources/shaders
+        cp pdf_viewer/{prefs,keys}.config tutorial.pdf $resources/
+      '';
+  });
 in {
   darwinConfigurations."${profile.hostName}" = nix-darwin.lib.darwinSystem {
     modules = [
@@ -45,6 +59,7 @@ in {
       {
         environment.systemPackages = [
           pkgs.duti
+          sioyek
         ];
 
         # https://github.com/nix-darwin/nix-darwin/issues/663
@@ -68,7 +83,7 @@ in {
             }
 
             tuples=(
-              "stirling.pdf.dev:com.adobe.pdf"
+              "info.sioyek.sioyek:com.adobe.pdf"
               "com.microsoft.VSCode:public.plain-text"
               "com.microsoft.VSCode:public.source-code"
               "com.microsoft.VSCode:public.data"

@@ -23,7 +23,6 @@
         "cloudflare-warp"
         "spotify"
         "libreoffice"
-        "stirling-pdf"
         "anki"
         "discord"
       ]
