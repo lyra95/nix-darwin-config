@@ -11,21 +11,20 @@ inputs @ {
       inherit system;
       nixpkgs = pkgs;
     }).mkShell;
-in {
+
   # `nix flake check` does not evaluate `darwinConfigurations` or
   # `homeConfigurations` on its own; it only checks that the outputs exist. Re-
   # exposing them as checks is what makes `nix flake check` actually evaluate and
   # build them, so eval errors and failed assertions are caught here.
-  checks =
-    lib.optionalAttrs (system == "aarch64-darwin")
-    (
-      lib.mapAttrs'
-      (name: cfg: lib.nameValuePair "darwin-${name}" cfg.config.system.build.toplevel)
-      self.darwinConfigurations
-      // lib.mapAttrs'
-      (name: cfg: lib.nameValuePair "home-${name}" cfg.activationPackage)
-      self.homeConfigurations
-    );
+  configChecks =
+    lib.mapAttrs'
+    (name: cfg: lib.nameValuePair "darwin-${name}" cfg.config.system.build.toplevel)
+    self.darwinConfigurations
+    // lib.mapAttrs'
+    (name: cfg: lib.nameValuePair "home-${name}" cfg.activationPackage)
+    self.homeConfigurations;
+in {
+  checks = lib.optionalAttrs (system == "aarch64-darwin") configChecks;
   formatter = pkgs.alejandra;
   devShells.default = mkShell {
     packages = [
@@ -45,6 +44,21 @@ in {
         name = "debug";
         command = ''
           nix repl --extra-experimental-features 'flakes repl-flake' "$PRJ_ROOT"
+        '';
+      }
+      {
+        # `nix flake check` alone only checks the machine's own system, so on a
+        # non-darwin host it silently checks nothing. Naming the attributes
+        # explicitly keeps this darwin-only wherever it runs.
+        help = "eval + build the aarch64-darwin configurations";
+        name = "check";
+        command = ''
+          nix build --no-link --print-build-logs \
+            ${
+            lib.concatMapStringsSep " \\\n    "
+            (name: ''"$PRJ_ROOT#checks.aarch64-darwin.${name}"'')
+            (builtins.attrNames configChecks)
+          }
         '';
       }
       {
