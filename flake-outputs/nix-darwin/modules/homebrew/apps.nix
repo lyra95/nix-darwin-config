@@ -25,6 +25,7 @@
         "libreoffice"
         "anki"
         "discord"
+        "claude-code"
       ]
       ++ work;
 
