@@ -15,7 +15,6 @@
         "1password"
         "tailscale-app"
         "jetbrains-toolbox"
-        "podman-desktop"
         "steam"
         "parsec"
         "fork"
