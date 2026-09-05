@@ -1,8 +1,10 @@
 inputs @ {
+  self,
   nixpkgs,
   devshell,
   ...
 }: system: let
+  lib = nixpkgs.lib;
   pkgs = nixpkgs.legacyPackages.${system};
   mkShell =
     (import devshell {
@@ -10,7 +12,20 @@ inputs @ {
       nixpkgs = pkgs;
     }).mkShell;
 in {
-  checks = {};
+  # `nix flake check` does not evaluate `darwinConfigurations` or
+  # `homeConfigurations` on its own; it only checks that the outputs exist. Re-
+  # exposing them as checks is what makes `nix flake check` actually evaluate and
+  # build them, so eval errors and failed assertions are caught here.
+  checks =
+    lib.optionalAttrs (system == "aarch64-darwin")
+    (
+      lib.mapAttrs'
+      (name: cfg: lib.nameValuePair "darwin-${name}" cfg.config.system.build.toplevel)
+      self.darwinConfigurations
+      // lib.mapAttrs'
+      (name: cfg: lib.nameValuePair "home-${name}" cfg.activationPackage)
+      self.homeConfigurations
+    );
   formatter = pkgs.alejandra;
   devShells.default = mkShell {
     packages = [
