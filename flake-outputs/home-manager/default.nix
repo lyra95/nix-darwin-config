@@ -16,6 +16,7 @@ inputs @ {
     home = {
       home.username = name;
       home.homeDirectory = "/Users/${name}";
+      home.sessionPath = ["$HOME/.local/bin"];
       home.stateVersion = "25.05";
     };
   };
