@@ -60,6 +60,7 @@ in {
         environment.systemPackages = [
           pkgs.duti
           sioyek
+          pkgs.uv
         ];
 
         # https://github.com/nix-darwin/nix-darwin/issues/663
