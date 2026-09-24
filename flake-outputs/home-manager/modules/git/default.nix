@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
   options = {
@@ -15,8 +16,13 @@
       }
     ];
 
+    home.packages = with pkgs; [
+      git-lfs
+    ];
+
     # todo: add gpg signing
     programs.git = {
+      lfs.enable = true;
       enable = true;
 
       settings = {
