@@ -25,6 +25,7 @@
         "anki"
         "discord"
         "claude-code"
+        "codex"
       ]
       ++ work;
 
